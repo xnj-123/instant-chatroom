@@ -1,0 +1,57 @@
+export default [
+    {
+        path:'/',
+        component:()=>import('@/layout/index.vue'),
+        redirect:'/room',
+        children:[
+            {
+                path:'room',
+                component:()=>import('@/views/room/index.vue'),
+                name:'Room',
+                children:[
+                    {
+                        path:'chat/:friendId?',
+                        component:()=>import('@/views/chat/index.vue'),
+                        name:'Chat'
+                    }
+                ]
+            },
+            {
+                path:'friendsList',
+                component:()=>import('@/views/friendsList/index.vue'),
+                name:'FriendsList',
+                children:[
+                    {
+                        path:'user/:userId?',
+                        component:()=>import('@/views/friendInfo/index.vue'),
+                        name:'User'
+                    },{
+                        path:'group/:groupId?',
+                        component:()=>import('@/views/groupInfo/index.vue'),
+                        name:'Group'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path:'/login',
+        component:()=>import('@/views/login/index.vue'),
+        name:'Login'
+    },
+    {
+        path:'/register',
+        component:()=>import('@/views/register/index.vue'),
+        name:'Register'
+    },
+    {
+        path:'/404',
+        component:()=>import('@/views/404/index.vue'),
+        name:'404'
+    },
+    {
+        path:'/:pathMact(.*)*',
+        redirect: './404',
+        name: 'Any',
+    }
+]
